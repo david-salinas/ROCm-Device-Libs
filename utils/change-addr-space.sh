@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # Usage:
-# utils/change-addr-space.sh src  : apply utils/add_amdgiz.sed
+# utils/change-addr-space.sh triple dir : apply utils/add_amdgiz.sed to all ll files in dir
 #                                adopt generic address space is address space 0
-# utils/change-addr-space.sh src x : apply utils/remove_amdgiz.sed
+# utils/change-addr-space.sh triple dir x : apply utils/remove_amdgiz.sed to all ll files in dir
 #                                adopt generic address space is address space 4
 
 tmpfile=/tmp/cas$$.sed
