@@ -33,3 +33,5 @@ __printf_alloc(uint bytes)
     return ptr + OFFSET + offset;
 }
 
+// Return a generic pointer to the __global pointer 
+char * __printf_alloc_generic(uint bytes) {return (char*) __printf_alloc(bytes);}

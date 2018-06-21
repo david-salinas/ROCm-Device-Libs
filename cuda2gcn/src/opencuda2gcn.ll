@@ -168,6 +168,12 @@ define void @nvvm.barrier1(i32,i32) local_unnamed_addr #3 {
 }
 
 ; Function Attrs: alwaysinline nounwind
+define void @llvm_amdgcn_s_barrier() local_unnamed_addr #3 {
+  tail call void @llvm.amdgcn.s.barrier() #1
+  ret void
+}
+
+; Function Attrs: alwaysinline nounwind
 define void @nvvm.barrier(i32, i32) local_unnamed_addr #3 {
   tail call void @llvm.amdgcn.s.barrier() #1
   ret void

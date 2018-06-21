@@ -6,10 +6,6 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include "hip_minimal.h"
-
-//  ====================================================
-//  ----  FIXME:  Create a hip header file out of this -------
 #define HIP_VERSION 0
 #define HIP_RELEASE 0
 #define HIP_PATCH   0
@@ -30,38 +26,13 @@ struct hip_service_header{
 };
 typedef struct hip_service_header hip_service_header_t; // size 
 
-struct buffer_header_s{
-  unsigned size;
-  unsigned total;
-};
-typedef struct buffer_header_s buffer_header_t;
-
-
 #ifndef NULL
 #define NULL 0
 #endif
 
-//  ----  End  Create a header file out of this -------
-//  ====================================================
+#define INLINE extern "C" __attribute__((device,always_inline)) const
 
-#define INLINE extern "C" __attribute__((always_inline,const)) __device__
-#define OFFSET 8
-
-// We communicate the pointer to the service buffer with this global variable
-extern __device__ long *hip_service_buffer;
-
-// hipdrt_alloc_service_buffer:  Allocate device global memory hipdrt_alloc_service_buffer
-INLINE char * hipdrt_alloc_service_buffer(uint bufsz) {
-    char *ptr = (char *) *hip_service_buffer;
-    uint size = ((uint *)ptr)[1];
-    uint offset = atomicAdd((unsigned int *)ptr, 0);
-    for (;;) {
-        if (OFFSET + offset + bufsz > size) return NULL;
-        if (atomicCAS((unsigned int *)ptr, offset, offset+bufsz))
-            break;
-    }
-    return ptr + OFFSET + offset;
-}
+INLINE char * __printf_alloc_generic(uint bufsz);
 
 // gen2dev_memcpy:  Generic to global memcpy for character string
 INLINE void gen2dev_memcpy(char*dst, char*src, uint len) {
@@ -74,7 +45,8 @@ INLINE char* hipdrt_printf_alloc(char*fmtstr, uint fmtlen, uint datalen) {
     // Allocate device global memory
     size_t headsize = sizeof(hip_service_header_t);
     uint buffsize   = (uint) headsize + fmtlen + datalen ;
-    char* buffer = hipdrt_alloc_service_buffer(buffsize);
+    // char* buffer = hipdrt_alloc_service_buffer(buffsize);
+    __device__ const char* buffer = __printf_alloc_generic(buffsize);
     if (buffer) {
         hip_service_header_t* header = (hip_service_header_t*) buffer;
         header->size           = buffsize;
