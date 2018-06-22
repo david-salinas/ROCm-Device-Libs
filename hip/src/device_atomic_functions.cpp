@@ -10,7 +10,9 @@
 // The headers for these implementation are in the cuda_open headers 
 // in device_atomic_functions.hpp
 
+#ifndef __OVERL__
 #define __OVERL__ __attribute__((device,always_inline, overloadable)) const
+#endif
 
 // atomicAdd()
 // ------ support for overloaded atomicAdd ------
