@@ -11,16 +11,11 @@
 ##===----------------------------------------------------------------------===##
 
 #  Try to get LLVM_COMPILER from HIP, then HCC2 , then default /usr/local/hip
-set(HIP $ENV{HIP})
-if(HIP)
-  set(LLVM_COMPILER ${HIP})
+set(HCC2 $ENV{HCC2})
+if(HCC2)
+  set(LLVM_COMPILER ${HCC2})
 else()
-  set(HCC2 $ENV{HCC2})
-  if(HCC2)
-    set(LLVM_COMPILER ${HCC2})
-  else()
-    set(LLVM_COMPILER "/opt/rocm/hcc2")
-  endif()
+  set(LLVM_COMPILER "/opt/rocm/hcc2")
 endif()
 
 # Assome rocm-device-libs repository is next to hcc2-hip repository 
