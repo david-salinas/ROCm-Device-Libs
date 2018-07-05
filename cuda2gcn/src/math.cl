@@ -298,14 +298,26 @@ ATTR float __nv_modff(float x, __private float *ptr) { return __ocml_modf_f32(x,
 //-------- T __nv_norm3d
 ATTR double __nv_norm3d(double x, double y, double z) { return __ocml_len3_f64(x,y,z); }
 
+//-------- T __nv_rnorm3d
+ATTR double __nv_rnorm3d(double x, double y, double z) { return __ocml_rlen3_f64(x,y,z); }
+
 //-------- T __nv_norm3df
 ATTR float __nv_norm3df(float x, float y, float z) { return __ocml_len3_f32(x,y,z); }
+
+//-------- T __nv_rnorm3df
+ATTR float __nv_rnorm3df(float x, float y, float z) { return __ocml_rlen3_f32(x,y,z); }
 
 //-------- T __nv_norm4d
 ATTR double __nv_norm4d(double a, double b, double c, double d) { return __ocml_len4_f64(a,b,c,d); }
 
+//-------- T __nv_rnorm4d
+ATTR double __nv_rnorm4d(double a, double b, double c, double d) { return __ocml_rlen4_f64(a,b,c,d); }
+
 //-------- T __nv_norm4df
 ATTR float __nv_norm4df(float a, float b, float c, float d) { return __ocml_len4_f32(a,b,c,d); }
+
+//-------- T __nv_rnorm4df
+ATTR float __nv_rnorm4df(float a, float b, float c, float d) { return __ocml_rlen4_f32(a,b,c,d); }
 
 //-------- T __nv_normcdf
 ATTR double __nv_normcdf(double x) { return __ocml_ncdf_f64(x); }
@@ -350,5 +362,4 @@ ATTR void __nv_sincosf(float x, __private float * sptr, __private float *cptr) {
 ATTR void __nv_sincospi(double x, __private double * sptr, __private double *cptr) { (*sptr)=__ocml_sincospi_f64(x, cptr); }
 
 //-------- T __nv_sincospif
-ATTR void __nv_sincosfpif(float x, __private float * sptr, __private float *cptr) { (*sptr)=__ocml_sincospi_f32(x, cptr); }
-
+ATTR void __nv_sincospif(float x, __private float * sptr, __private float *cptr) { (*sptr)=__ocml_sincospi_f32(x, cptr); }
