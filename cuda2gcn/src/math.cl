@@ -215,10 +215,6 @@ FUNC1(round)
 //-------- T __nv_rsqrtf
 FUNC1(rsqrt)
 
-//-------- T __nv_scalbn
-//-------- T __nv_scalbnf
-FUNC2(scalbn)
-
 //-------- T __nv_sin
 //-------- T __nv_sinf
 FUNC1(sin)
@@ -345,6 +341,12 @@ ATTR float __nv_remquof(float x, float y, __private int *ptr) { return __ocml_re
 
 //-------- T __nv_saturatef
 ATTR float __nv_saturatef(float x) { return __ocml_min_f32(__ocml_max_f32(x, 0.0f), 1.0f); }
+
+//-------- T __nv_scalbn
+ATTR double __nv_scalbn(double x, int y) { return __ocml_scalbn_f64(x, y); }
+
+//-------- T __nv_scalbnf
+ATTR float __nv_scalbnf(float x, int y) { return __ocml_scalbn_f32(x, y); }
 
 //-------- T __nv_signbitd
 ATTR int __nv_signbitd(double x) { return __ocml_signbit_f64(x); }
