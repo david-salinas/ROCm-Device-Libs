@@ -268,10 +268,10 @@ ATTR double __nv_cyl_bessel_i1(double x) { return __ocml_i1_f64(x); }
 ATTR float __nv_cyl_bessel_i1f(float x) { return __ocml_i1_f32(x); }
 
 //-------- T __nv_frexp
-ATTR double __nv_frexp(double x, __private int *ptr) { return __ocml_frexp_f64(x, ptr); }
+ATTR double __nv_frexp(double x, int *ptr) { return __ocml_frexp_f64(x, (__private int *) ptr); }
 
 //-------- T __nv_frexpf
-ATTR float __nv_frexpf(float x, __private int *ptr) { return __ocml_frexp_f32(x, ptr); }
+ATTR float __nv_frexpf(float x, int *ptr) { return __ocml_frexp_f32(x, (__private int *) ptr); }
 
 //-------- T __nv_ilogb
 ATTR int __nv_ilogb(double x) { return __ocml_ilogb_f64(x); }
@@ -286,10 +286,10 @@ ATTR double __nv_ldexp(double x, int i) { return __ocml_ldexp_f64(x, i); }
 ATTR float __nv_ldexpf(float x, int i) { return __ocml_ldexp_f32(x, i); }
 
 //-------- T __nv_modf
-ATTR double __nv_modf(double x, __private double *ptr) { return __ocml_modf_f64(x, ptr); }
+ATTR double __nv_modf(double x, double *ptr) { return __ocml_modf_f64(x, (__private double *) ptr); }
 
 //-------- T __nv_modff
-ATTR float __nv_modff(float x, __private float *ptr) { return __ocml_modf_f32(x, ptr); }
+ATTR float __nv_modff(float x, float *ptr) { return __ocml_modf_f32(x, (__private float *) ptr); }
 
 //-------- T __nv_norm3d
 ATTR double __nv_norm3d(double x, double y, double z) { return __ocml_len3_f64(x,y,z); }
@@ -334,10 +334,10 @@ ATTR double __nv_powi(double x, int n) { return __ocml_pown_f64(x, n); }
 ATTR float __nv_powif(float x, int n) { return __ocml_pown_f32(x, n); }
 
 //-------- T __nv_remquo
-ATTR double __nv_remquo(double x, double y, __private int *ptr) { return __ocml_remquo_f64(x, y, ptr); }
+ATTR double __nv_remquo(double x, double y, int *ptr) { return __ocml_remquo_f64(x, y, (__private int *) ptr); }
 
 //-------- T __nv_remquof
-ATTR float __nv_remquof(float x, float y, __private int *ptr) { return __ocml_remquo_f32(x, y, ptr); }
+ATTR float __nv_remquof(float x, float y, int *ptr) { return __ocml_remquo_f32(x, y, (__private int *) ptr); }
 
 //-------- T __nv_saturatef
 ATTR float __nv_saturatef(float x) { return __ocml_min_f32(__ocml_max_f32(x, 0.0f), 1.0f); }
@@ -355,13 +355,17 @@ ATTR int __nv_signbitd(double x) { return __ocml_signbit_f64(x); }
 ATTR int __nv_signbitf(float x) { return __ocml_signbit_f32(x); }
 
 //-------- T __nv_sincos
-ATTR void __nv_sincos(double x, __private double * sptr, __private double *cptr) { (*sptr)=__ocml_sincos_f64(x, cptr); }
+ATTR void __nv_sincos(double x, double * sptr, double *cptr)
+     { (*((__private double *)sptr))=__ocml_sincos_f64(x, (__private double *) cptr); }
 
 //-------- T __nv_sincosf
-ATTR void __nv_sincosf(float x, __private float * sptr, __private float *cptr) { (*sptr)=__ocml_sincos_f32(x, cptr); }
+ATTR void __nv_sincosf(float x, float * sptr, float *cptr)
+     { (*((__private float *)sptr))=__ocml_sincos_f32(x, (__private float *) cptr); }
 
 //-------- T __nv_sincospi
-ATTR void __nv_sincospi(double x, __private double * sptr, __private double *cptr) { (*sptr)=__ocml_sincospi_f64(x, cptr); }
+ATTR void __nv_sincospi(double x, double * sptr, double *cptr)
+     { (*((__private double *)sptr))=__ocml_sincospi_f64(x, (__private double *)cptr); }
 
 //-------- T __nv_sincospif
-ATTR void __nv_sincospif(float x, __private float * sptr, __private float *cptr) { (*sptr)=__ocml_sincospi_f32(x, cptr); }
+ATTR void __nv_sincospif(float x, float * sptr, float *cptr)
+     { (*((__private float *)sptr))=__ocml_sincospi_f32(x, (__private float *) cptr); }
