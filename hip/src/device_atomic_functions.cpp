@@ -143,6 +143,12 @@ __OVERL__ unsigned long long atomicXor(unsigned long long *address,
 __OVERL__ unsigned atomicInc(unsigned *address) {
   return atomic_inc_unsigned(address);
 }
+__OVERL__ unsigned atomicInc(unsigned *address, unsigned max) {
+  if (*address>=max)
+    return *address;
+  else
+    return atomic_inc_unsigned(address);
+}
 __OVERL__ int atomicInc(int *address) {
   return atomic_inc_int(address);
 }
