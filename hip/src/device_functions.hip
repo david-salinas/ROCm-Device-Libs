@@ -322,6 +322,29 @@ __device__ unsigned long long __umul64hi(unsigned long long int x, unsigned long
     return x1*y1 + z2 + (z1 >> 32);
 }
 
+#ifndef __OVERLOAD__
+#define __OVERLOAD__ __attribute__((device,always_inline, overloadable)) const
+#endif
+#ifndef __NOOVERLO__
+#define __NOOVERLO__ extern "C" __attribute__((device,always_inline)) const
+#endif
+
+__NOOVERLO__ int nvvm_shfl_down_i32(int a, unsigned b,int c);
+__OVERLOAD__ int __shfl_down(int a, unsigned int b, int c) {
+   return nvvm_shfl_down_i32(a,b,c);
+}
+
+#if 0
+// These are all the IR defined shuffles for future reference
+define i32 @nvvm.shfl.idx.i32(i32, i32, i32)
+define i32 @nvvm.shfl.up.i32(i32, i32, i32)
+define float @nvvm.shfl.up.f32(float, i32, i32)
+define i32 @nvvm.shfl.down.i32(i32, i32, i32)
+define float @nvvm.shfl.down.f32(float, i32, i32)
+define i32 @nvvm.shfl.bfly.i32(i32, i32, i32)
+define float @nvvm.shfl.bfly.f32(float, i32, i32)
+#endif 
+
 /*
 HIP specific device functions
 */
@@ -390,4 +413,5 @@ __device__ char4 __hip_hc_mul8pk(char4 in1, char4 in2) {
     out.a = out.a | ((one1 * one2) & MASK2);
     return out;
 }
+
 #endif

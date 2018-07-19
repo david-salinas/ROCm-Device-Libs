@@ -483,6 +483,12 @@ define i32 @nvvm.shfl.down.i32(i32, i32, i32) local_unnamed_addr #5 {
 }
 
 ; Function Attrs: alwaysinline convergent nounwind readnone
+define i32 @nvvm_shfl_down_i32(i32, i32, i32) local_unnamed_addr #5 {
+  %retvalue = call i32 @nvvm.shfl.down.i32(i32 %0, i32 %1, i32 %2)
+  ret i32 %retvalue;
+}
+
+; Function Attrs: alwaysinline convergent nounwind readnone
 define float @nvvm.shfl.down.f32(float, i32, i32) local_unnamed_addr #5 {
   %4 = bitcast float %0 to i32
   %5 = tail call i32 @llvm.amdgcn.mbcnt.lo(i32 -1, i32 0) #0
