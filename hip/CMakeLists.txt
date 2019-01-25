@@ -60,7 +60,7 @@ endforeach()
 
 # rocm-device-libs does not have a cmake variable for mcpu so we rely on 
 # sed to change "f1ji" to the actual gfx number
-set(mcpu "fiji")
+set(mcpu "gfx803")
 message("---> Building ${libname} for gfx processors: ${mcpu}")
 
 set(hip_bc_files)
