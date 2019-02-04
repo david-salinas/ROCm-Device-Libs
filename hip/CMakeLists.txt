@@ -6,19 +6,19 @@
 # Source Licenses. See LICENSE.txt for details.
 ##===----------------------------------------------------------------------===##
 #
-# hcc2-hip/libdevice/CMakeLists.txt
+# aomp-hip/libdevice/CMakeLists.txt
 #
 ##===----------------------------------------------------------------------===##
 
-#  Try to get LLVM_COMPILER from HIP, then HCC2 , then default /usr/local/hip
-set(HCC2 $ENV{HCC2})
-if(HCC2)
-  set(LLVM_COMPILER ${HCC2})
+#  Try to get LLVM_COMPILER from HIP, then AOMP , then default /usr/local/hip
+set(AOMP $ENV{AOMP})
+if(AOMP)
+  set(LLVM_COMPILER ${AOMP})
 else()
-  set(LLVM_COMPILER "/opt/rocm/hcc2")
+  set(LLVM_COMPILER "$ENV{HOME}/rocm/aomp")
 endif()
 
-# Assome rocm-device-libs repository is next to hcc2-hip repository 
+# Assome rocm-device-libs repository is next to hip repository 
 set(ROCDL ${CMAKE_CURRENT_SOURCE_DIR}/../../rocm-device-libs)
 set(ROCDL_INC_OCKL ${ROCDL}/ockl/inc)
 set(ROCDL_INC_OCML ${ROCDL}/ocml/inc)
